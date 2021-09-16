@@ -34,3 +34,25 @@ attendconcert.then((data) => console.log(data));
 attendconcert.catch((error) => console.log(error));
 
 attendconcert.then((data) => console.log(data)).catch((error) => console.log(error));
+
+
+let afunc = async() => {
+    try {
+        let result = await attendconcert;
+        console.log(result);
+    } catch (e) {
+        console.log(e);
+    }
+
+}
+
+afunc();
+
+
+
+// async function afunc() {
+//     let result = await attendconcert;
+//     console.log(result);
+
+// }
+// afunc();
