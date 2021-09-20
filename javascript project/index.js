@@ -29,7 +29,7 @@ const generateTaskCard = ({ id, url, title, type, description }) => {
                 <div class="card-header">
                     <div class="d-flex justify-content-end">
 
-                        <button type="button" class="btn btn-outline-info" name=${id} onclick="editTask(this)" > 
+                        <button type="button" class="btn btn-outline-info" named=${id} onclick="editTask(this)" > 
                         <i class="fas fa-pencil-alt" name=${id} onclick="editTask(this)"></i>
                         </button>
                        
@@ -71,6 +71,7 @@ const reloadTaskCard = () => {
 
     console.log(globaldata);
 
+
     globaldata.map((cardData) => {
             taskContents.insertAdjacentHTML("beforeend", generateTaskCard(cardData));
         }
@@ -88,7 +89,7 @@ const deleteTask = (e) => {
 
 
 const editTask = (e) => {
-        const targetID = e.getAttribute("name");
+        const targetID = e.getAttribute("named");
 
 
         e.parentNode.parentNode.parentNode.childNodes[5].childNodes[1].setAttribute("contenteditable", "true")
