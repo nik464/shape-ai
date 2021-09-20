@@ -49,7 +49,7 @@ const generateTaskCard = ({ id, url, title, type, description }) => {
                 </div>
 
                 <div class="card-footer">
-                    <button class="btn btn-outline-primary float-end">OPEN TASK</button>
+                    <button  class="btn btn-outline-primary float-end" names=${id}>OPEN TASK</button>
                 </div>
 
             </div>
@@ -89,15 +89,11 @@ const deleteTask = (e) => {
 
 const editTask = (e) => {
         const targetID = e.getAttribute("name");
-        console.log(e.parentNode.parentNode.parentNode.childNodes);
-        console.log(e.parentNode.parentNode.parentNode.childNodes[5].childNodes[1]);
-        console.log(e.parentNode.parentNode.parentNode.childNodes[5].childNodes[3]);
-        console.log(e.parentNode.parentNode.parentNode.childNodes[5].childNodes[5]);
 
 
-        e.parentNode.parentNode.parentNode.childNodes[5].childNodes[1].setAttribute("contenteditable", "true");
-        e.parentNode.parentNode.parentNode.childNodes[5].childNodes[3].setAttribute("contenteditable", "true");
-        e.parentNode.parentNode.parentNode.childNodes[5].childNodes[5].setAttribute("contenteditable", "true");
+        e.parentNode.parentNode.parentNode.childNodes[5].childNodes[1].setAttribute("contenteditable", "true")
+        e.parentNode.parentNode.parentNode.childNodes[5].childNodes[3].setAttribute("contenteditable", "true")
+        e.parentNode.parentNode.parentNode.childNodes[5].childNodes[5].setAttribute("contenteditable", "true")
 
         console.log(e.parentNode.parentNode.parentNode.childNodes[7].childNodes[1]);
         e.parentNode.parentNode.parentNode.childNodes[7].childNodes[1].setAttribute("onclick", "saveEditabletask(this)");
@@ -108,3 +104,36 @@ const editTask = (e) => {
     //statetaskList is attribute
 
 //style.setProperty
+
+const saveEditabletask = (e) => {
+    const targetID = e.getAttribute("names"); //names is the name of my save changes button
+    console.log("My program", e);
+
+    e.parentNode.parentNode.childNodes[5].childNodes[1]; //taken updated fields
+    e.parentNode.parentNode.childNodes[5].childNodes[3];
+    e.parentNode.parentNode.childNodes[5].childNodes[5];
+
+
+    const newTaskDetails = {
+        title: e.parentNode.parentNode.childNodes[5].childNodes[1].innerHTML, //taken updated fields
+        type: e.parentNode.parentNode.childNodes[5].childNodes[3].innerHTML,
+        description: e.parentNode.parentNode.childNodes[5].childNodes[5].innerHTML
+    };
+
+
+    const localStoragecopy = JSON.parse(localStorage.getItem("mytasks"));
+    console.log("localStoragecopy");
+    if (localStoragecopy) {
+
+        globaldata = localStoragecopy["tasks"];
+    }
+
+
+    globaldata = globaldata.filter((cardData) => cardData.id == targetID);
+    globaldata.push(newTaskDetails);
+
+    savetolocalstorage();
+    window.location.reload();
+
+
+}
